@@ -7,22 +7,35 @@ interface InputFilter {
 
 const InputFilter = ({ waitForKey, waitForMsec = 100 }: InputFilter) => {
   const [enteredFilter, setEnteredFilter] = useState('');
+  const [isCleaned, setIsCleaned] = useState(true);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const inputValue = inputRef.current?.value;
 
-    if (inputValue) {
-      const timer = setTimeout(() => {
-        if (enteredFilter === inputValue && inputValue.length > waitForKey) {
-          console.log('send action');
-        }
-      }, waitForMsec);
-      return () => {
-        clearTimeout(timer);
-      };
+    if (enteredFilter.length >= waitForKey) {
+      setIsCleaned(false);
+      if (inputValue) {
+        const timer = setTimeout(() => {
+          if (enteredFilter === inputValue) {
+            console.log('send action with filter', enteredFilter);
+          }
+        }, waitForMsec);
+        return () => {
+          clearTimeout(timer);
+        };
+      }
+    } else {
+      setIsCleaned(true);
     }
   }, [enteredFilter]);
+
+  useEffect(() => {
+    if (isCleaned && enteredFilter) {
+      console.log('send action to clean');
+      // dispatchEvent(cleanMovies(''))
+    }
+  }, [isCleaned]);
 
   useEffect(() => {
     inputRef.current?.focus();
