@@ -6,7 +6,7 @@ interface InputFilter {
   clearWhenDelete: boolean;
 }
 
-const InputFilter = ({ waitForKey, waitForMsec = 100, clearWhenDelete }: InputFilter) => {
+const InputFilter = ({ waitForKey = 1, waitForMsec = 100, clearWhenDelete = false }: InputFilter) => {
   const [enteredFilter, setEnteredFilter] = useState('');
   const [isCleaned, setIsCleaned] = useState(true);
   const inputRef = useRef<HTMLInputElement>(null);
