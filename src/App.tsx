@@ -1,11 +1,10 @@
+import MovieFinder from 'pages/MovieFinder';
 import './App.scss';
 
 const App = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <span>hello</span>
-      </header>
+      <MovieFinder />
     </div>
   );
 };
