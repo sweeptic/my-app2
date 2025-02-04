@@ -1,14 +1,24 @@
-// import { moviesReducer } from './reducers/moviesReducer';
-import { configureStore } from '@reduxjs/toolkit';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { moviesMiddleware } from './middleware/feature/movie';
+import { apiMiddleware } from './middleware/core/api';
+import { normalizeMiddleware } from './middleware/core/normalize';
+import { movies } from './reducers/moviesReducer';
 
-const reducer = () => {
-  //   movies: moviesReducer;
-};
+// const reducer = () => {
+//   movies;
+// };
 
-export const store = configureStore({
-  reducer,
+const rootReducer = combineReducers({
+  movies: movies,
 });
 
-export const er = () => {
-  console.log('err');
-};
+const featureMiddleware = [moviesMiddleware];
+
+const coreMiddleware = [apiMiddleware, normalizeMiddleware];
+
+const customMiddleware = [...featureMiddleware, ...coreMiddleware];
+
+export const store = configureStore({
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(customMiddleware),
+});

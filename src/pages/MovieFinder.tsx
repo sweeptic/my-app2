@@ -1,4 +1,4 @@
-import InputFilterComp from 'components/input-items/InputFilter';
+import InputFilter from 'components/input-items/InputFilter';
 
 const MovieFinder = () => {
   // customize the InputFilter
@@ -11,7 +11,7 @@ const MovieFinder = () => {
   return (
     <section>
       <div>
-        <InputFilterComp {...inputFilterSetup} />
+        <InputFilter {...inputFilterSetup} />
       </div>
       <article className="result">searchResult</article>
     </section>

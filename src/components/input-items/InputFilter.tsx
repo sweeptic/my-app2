@@ -1,4 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { cleanMovies, fetchMovies } from 'store/actions/movie';
+import { getMovesRawData } from 'store/reducers/moviesReducer';
 
 interface InputFilter {
   waitForKey: number;
@@ -10,6 +13,8 @@ const InputFilter = ({ waitForKey = 1, waitForMsec = 100, clearWhenDelete = fals
   const [enteredFilter, setEnteredFilter] = useState('');
   const [isCleaned, setIsCleaned] = useState(true);
   const inputRef = useRef<HTMLInputElement>(null);
+  const dispatch = useDispatch();
+  const movies = useSelector((state) => getMovesRawData(state));
 
   useEffect(() => {
     const inputValue = inputRef.current?.value;
@@ -19,7 +24,7 @@ const InputFilter = ({ waitForKey = 1, waitForMsec = 100, clearWhenDelete = fals
       if (inputValue) {
         const timer = setTimeout(() => {
           if (enteredFilter === inputValue) {
-            console.log('send action with filter', enteredFilter);
+            dispatch(fetchMovies({ query: enteredFilter }));
           }
         }, waitForMsec);
         return () => {
@@ -33,14 +38,17 @@ const InputFilter = ({ waitForKey = 1, waitForMsec = 100, clearWhenDelete = fals
 
   useEffect(() => {
     if (isCleaned && enteredFilter && clearWhenDelete) {
-      console.log('send action to clean');
-      // dispatchEvent(cleanMovies(''))
+      dispatch(cleanMovies());
     }
   }, [isCleaned]);
 
   useEffect(() => {
     inputRef.current?.focus();
   }, []);
+
+  useEffect(() => {
+    console.log('movies state changed', movies);
+  }, [movies]);
 
   return (
     <input
