@@ -3,8 +3,6 @@ import { SET_MOVIES } from 'store/actions/movie';
 const initState: never[] = [];
 
 export const movies = (movies = initState, action: any) => {
-  console.log('4. moviesReducer catch');
-
   switch (action.type) {
     case SET_MOVIES:
       return action.payload;

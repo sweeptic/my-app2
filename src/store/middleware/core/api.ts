@@ -4,9 +4,6 @@ export const apiMiddleware =
   ({ dispatch }: any) =>
   (next: any) =>
   (action: any): any => {
-    console.log('2. API MD', action.type);
-    console.log('next action');
-
     next(action);
 
     if (action.type.includes('API_REQUEST')) {
