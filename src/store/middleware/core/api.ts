@@ -9,6 +9,8 @@ export const apiMiddleware =
     if (action.type.includes('API_REQUEST')) {
       const { body, url, method, feature } = action.meta;
 
+      console.log('API_REQUEST', feature);
+
       fetch(url, { body, method })
         .then((response) => response.json())
         .then((response) => {

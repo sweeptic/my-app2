@@ -7,8 +7,10 @@ import { loggerMiddleware } from './middleware/core/logger';
 import { moviesReducer } from './reducers/moviesReducer';
 import { genresMiddleware } from './middleware/feature/genre';
 import { genresReducer } from './reducers/genresReducer';
+import { uiReducer } from './reducers/uiReducer';
 
 const rootReducer = combineReducers({
+  ui: uiReducer,
   movies: moviesReducer,
   genres: genresReducer,
 });
