@@ -4,11 +4,13 @@ import { apiMiddleware } from './middleware/core/api';
 import { normalizeMiddleware } from './middleware/core/normalize';
 import { actionSplitterMiddleware } from './middleware/core/actionSplitterMiddleware';
 import { loggerMiddleware } from './middleware/core/logger';
-import { movies } from './reducers/moviesReducer';
+import { moviesReducer } from './reducers/moviesReducer';
 import { genresMiddleware } from './middleware/feature/genre';
+import { genresReducer } from './reducers/genresReducer';
 
 const rootReducer = combineReducers({
-  movies: movies,
+  movies: moviesReducer,
+  genres: genresReducer,
 });
 
 const featureMiddleware = [genresMiddleware, moviesMiddleware];

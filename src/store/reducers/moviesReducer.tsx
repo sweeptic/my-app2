@@ -2,7 +2,7 @@ import { SET_MOVIES } from 'store/actions/movie';
 
 const initState: never[] = [];
 
-export const movies = (movies = initState, action: any) => {
+export const moviesReducer = (movies = initState, action: any) => {
   switch (action.type) {
     case SET_MOVIES:
       return action.payload;
