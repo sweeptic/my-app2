@@ -15,8 +15,6 @@ export const apiMiddleware =
       fetch(url, { body, method })
         .then((response) => response.json())
         .then((response) => {
-          console.log('dispatch apiSuccess', feature);
-
           dispatch(apiSuccess({ response, feature }));
         })
         .catch((error) => {

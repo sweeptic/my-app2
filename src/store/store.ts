@@ -4,10 +4,6 @@ import { apiMiddleware } from './middleware/core/api';
 import { normalizeMiddleware } from './middleware/core/normalize';
 import { movies } from './reducers/moviesReducer';
 
-// const reducer = () => {
-//   movies;
-// };
-
 const rootReducer = combineReducers({
   movies: movies,
 });

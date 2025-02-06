@@ -13,8 +13,8 @@ export const normalizeMiddleware =
         return acc;
       }, {});
 
-      console.log('next setMovies action.type');
-
       next(setMovies({ movies, normalizeKey: null }));
+    } else {
+      next(action);
     }
   };

@@ -13,8 +13,6 @@ export const moviesMiddleware: Middleware = () => (next: any) => (action: any) =
 
   switch (action.type) {
     case FETCH_MOVIES:
-      console.log('next apiRequest movies');
-
       next(
         apiRequest({
           feature: MOVIES,
@@ -26,10 +24,10 @@ export const moviesMiddleware: Middleware = () => (next: any) => (action: any) =
       break;
 
     case CLEAN_MOVIES:
+      next(setMovies({ movies: {}, normalizeKey: '' }));
       break;
 
     case `${MOVIES} ${API_SUCCESS}`:
-      console.log('next setMovies');
       next(setMovies({ movies: action.payload.results, normalizeKey: 'id' }));
       break;
 

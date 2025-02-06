@@ -3,7 +3,7 @@ import { SET_MOVIES } from 'store/actions/movie';
 const initState: never[] = [];
 
 export const movies = (movies = initState, action: any) => {
-  console.log('4. moviesReducer catch', action.payload);
+  console.log('4. moviesReducer catch');
 
   switch (action.type) {
     case SET_MOVIES:
@@ -16,7 +16,7 @@ export const movies = (movies = initState, action: any) => {
 
 const getMovies = (state: any) => state.movies;
 
-export const getMovesRawData = (state: any) => {
+export const getMoviesRawData = (state: any) => {
   const movies = getMovies(state);
   return movies;
 };
