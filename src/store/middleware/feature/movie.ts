@@ -4,7 +4,7 @@ import { setNotification } from 'store/actions/message';
 import { CLEAN_MOVIES, FETCH_MOVIES, MOVIES, setMovies } from 'store/actions/movie';
 import { setLoader } from 'store/actions/ui';
 
-const API_KEY = '1c5abaaeaa13c66b570ad3042a0d51f4';
+const API_KEY = process.env.REACT_APP_MOVIE_API_KEY;
 const LANG = 'en-US';
 
 export const moviesMiddleware: Middleware = () => (next: any) => (action: any) => {

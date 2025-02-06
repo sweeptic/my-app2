@@ -3,7 +3,7 @@ import { FETCH_GENRES, GENRES, setGenres } from 'store/actions/genre';
 import { MOVIES } from 'store/actions/movie';
 import { setLoader } from 'store/actions/ui';
 
-const API_KEY = '1c5abaaeaa13c66b570ad3042a0d51f4'; // TODO
+const API_KEY = process.env.REACT_APP_MOVIE_API_KEY;
 const LANG = 'en-US';
 
 export const genresMiddleware = () => (next: any) => (action: any) => {

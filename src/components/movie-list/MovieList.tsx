@@ -14,13 +14,17 @@ const MovieList = () => {
     dispatch(fetchDetail({ query: item.toString() }));
   }
 
-  for (const key in moviesData) {
-    if (Object.prototype.hasOwnProperty.call(moviesData, key)) {
-      const element = moviesData[key];
+  function MovieFactory() {
+    for (const key in moviesData) {
+      if (Object.prototype.hasOwnProperty.call(moviesData, key)) {
+        const element = moviesData[key];
 
-      moviesList.push(<MovieItem key={key} item={element} onDetails={onMovieSelectHandler} />);
+        moviesList.push(<MovieItem key={key} item={element} onDetails={onMovieSelectHandler} />);
+      }
     }
   }
+
+  MovieFactory();
 
   return <>{moviesList}</>;
 };
