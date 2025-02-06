@@ -10,17 +10,25 @@ import { genresReducer } from './reducers/genresReducer';
 import { uiReducer } from './reducers/uiReducer';
 import { detailReducer } from './reducers/detailReducer';
 import { detailMiddleware } from './middleware/feature/detail';
+import { notificationReducer } from './reducers/notificationReducer';
+import { notificationMiddleware } from './middleware/core/notification';
 
 const rootReducer = combineReducers({
   ui: uiReducer,
   movies: moviesReducer,
-  genres: genresReducer,
   detail: detailReducer,
+  genres: genresReducer,
+  notifications: notificationReducer,
 });
 
 const featureMiddleware = [genresMiddleware, detailMiddleware, moviesMiddleware];
 
-const coreMiddleware = [actionSplitterMiddleware, apiMiddleware, normalizeMiddleware /* loggerMiddleware */];
+const coreMiddleware = [
+  actionSplitterMiddleware,
+  apiMiddleware,
+  normalizeMiddleware,
+  notificationMiddleware /* loggerMiddleware */,
+];
 
 const customMiddleware = [...featureMiddleware, ...coreMiddleware];
 

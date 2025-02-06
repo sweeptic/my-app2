@@ -12,7 +12,17 @@ export const apiMiddleware =
       fetch(url, { body, method })
         .then((response) => response.json())
         .then((response) => {
-          dispatch(apiSuccess({ response, feature }));
+          if (response.success === false) {
+            const error = {
+              response: response.status_code,
+              error: response.status_message,
+              feature: feature,
+            };
+            console.log('ERROR', { error, feature });
+            dispatch(apiError({ error, feature }));
+          } else {
+            dispatch(apiSuccess({ response, feature }));
+          }
         })
         .catch((error) => {
           console.log('error', error);

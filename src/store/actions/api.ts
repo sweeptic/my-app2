@@ -54,4 +54,8 @@ export const apiSuccess = ({ response, feature }: IApiResponse) => ({
   meta: { feature },
 });
 
-export const apiError = ({ error, feature }: IApiResponse) => ({});
+export const apiError = ({ error, feature }: IApiResponse) => ({
+  type: `${feature} ${API_ERROR}`,
+  payload: error,
+  meta: { feature },
+});

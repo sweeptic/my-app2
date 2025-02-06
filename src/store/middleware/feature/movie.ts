@@ -1,5 +1,6 @@
 import { Middleware } from '@reduxjs/toolkit';
-import { API_SUCCESS, apiRequest } from 'store/actions/api';
+import { API_ERROR, API_SUCCESS, apiRequest } from 'store/actions/api';
+import { setNotification } from 'store/actions/message';
 import { CLEAN_MOVIES, FETCH_MOVIES, MOVIES, setMovies } from 'store/actions/movie';
 import { setLoader } from 'store/actions/ui';
 
@@ -21,7 +22,6 @@ export const moviesMiddleware: Middleware = () => (next: any) => (action: any) =
           method: 'GET',
           url: MOVIES_URL,
         }),
-        ,
         setLoader({ state: true, feature: MOVIES }),
       ]);
       break;
@@ -33,6 +33,13 @@ export const moviesMiddleware: Middleware = () => (next: any) => (action: any) =
     case `${MOVIES} ${API_SUCCESS}`:
       next([
         setMovies({ movies: action.payload.results, normalizeKey: 'id' }),
+        setLoader({ state: false, feature: MOVIES }),
+      ]);
+      break;
+
+    case `${MOVIES} ${API_ERROR}`:
+      next([
+        setNotification({ message: action.payload, feature: MOVIES }),
         setLoader({ state: false, feature: MOVIES }),
       ]);
       break;

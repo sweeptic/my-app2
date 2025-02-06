@@ -5,6 +5,8 @@ export const normalizeMiddleware =
   ({ dispatch }: any) =>
   (next: any) =>
   (action: any): any => {
+    console.log('action', action);
+
     if (action.type.includes('SET') && action.meta.normalizeKey) {
       actionRouter(getNormalizeData());
     } else {
