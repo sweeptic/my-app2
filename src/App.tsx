@@ -1,5 +1,5 @@
 import MovieFinder from 'pages/MovieFinder';
-import './App.scss';
+import 'stylesheets/main.scss';
 
 const App = () => {
   return (

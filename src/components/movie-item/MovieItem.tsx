@@ -4,7 +4,7 @@ interface MovieItem {
 
 const MovieItem = ({ item }: MovieItem) => {
   return (
-    <div>
+    <div className="card">
       <span key={item.id}>{item.title}</span>
     </div>
   );
