@@ -1,13 +1,15 @@
 import InputFilter from 'components/input-items/InputFilter';
 import MovieList from 'components/movie-list/MovieList';
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchGenres } from 'store/actions/genre';
 import { getDetailRawData } from 'store/reducers/detailReducer';
 import { getLoadingState } from 'store/reducers/uiReducer';
 
 const MovieFinder = () => {
   const spinner = useSelector((state) => getLoadingState(state));
   const detail = useSelector((state) => getDetailRawData(state));
+  const dispatch = useDispatch();
 
   let contents;
 
@@ -25,6 +27,14 @@ const MovieFinder = () => {
   useEffect(() => {
     console.log('detail', detail);
   }, [detail]);
+
+  useEffect(() => {
+    getStaticCollections();
+  }, []);
+
+  function getStaticCollections() {
+    dispatch(fetchGenres({ query: '' }));
+  }
 
   // customize the InputFilter
   const inputFilterSetup = {
