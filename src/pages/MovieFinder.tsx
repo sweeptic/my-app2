@@ -2,10 +2,13 @@ import InputFilter from 'components/input-items/InputFilter';
 import MovieList from 'components/movie-list/MovieList';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { getDetailRawData } from 'store/reducers/detailReducer';
 import { getLoadingState } from 'store/reducers/uiReducer';
 
 const MovieFinder = () => {
   const spinner = useSelector((state) => getLoadingState(state));
+  const detail = useSelector((state) => getDetailRawData(state));
+
   let contents;
 
   // TODO
@@ -18,6 +21,10 @@ const MovieFinder = () => {
   useEffect(() => {
     console.log('spinner', spinner);
   }, [spinner]);
+
+  useEffect(() => {
+    console.log('detail', detail);
+  }, [detail]);
 
   // customize the InputFilter
   const inputFilterSetup = {
