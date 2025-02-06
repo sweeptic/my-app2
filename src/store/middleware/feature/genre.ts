@@ -1,5 +1,5 @@
 import { API_ERROR, API_SUCCESS, apiRequest } from 'store/actions/api';
-import { FETCH_GENRES, GENRES } from 'store/actions/genre';
+import { FETCH_GENRES, GENRES, setGenres } from 'store/actions/genre';
 import { MOVIES } from 'store/actions/movie';
 
 const API_KEY = '1c5abaaeaa13c66b570ad3042a0d51f4'; // TODO
