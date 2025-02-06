@@ -2,8 +2,9 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { moviesMiddleware } from './middleware/feature/movie';
 import { apiMiddleware } from './middleware/core/api';
 import { normalizeMiddleware } from './middleware/core/normalize';
-import { movies } from './reducers/moviesReducer';
+import { actionSplitterMiddleware } from './middleware/core/actionSplitterMiddleware';
 import { loggerMiddleware } from './middleware/core/logger';
+import { movies } from './reducers/moviesReducer';
 
 const rootReducer = combineReducers({
   movies: movies,
@@ -11,7 +12,7 @@ const rootReducer = combineReducers({
 
 const featureMiddleware = [moviesMiddleware];
 
-const coreMiddleware = [apiMiddleware, normalizeMiddleware, loggerMiddleware];
+const coreMiddleware = [/* actionSplitterMiddleware, */ apiMiddleware, normalizeMiddleware, loggerMiddleware];
 
 const customMiddleware = [...featureMiddleware, ...coreMiddleware];
 
