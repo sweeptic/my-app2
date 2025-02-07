@@ -10,11 +10,12 @@ const LANG = 'en-US';
 export const moviesMiddleware: Middleware = () => (next: any) => (action: any) => {
   next(action);
 
-  const QUERY = action.payload;
-  const MOVIES_URL = `https://api.themoviedb.org/3/search/multi?api_key=${API_KEY}&language=${LANG}&query=${QUERY}&page=1&include_adult=false"`;
-
   switch (action.type) {
-    case FETCH_MOVIES:
+    case FETCH_MOVIES: {
+      const QUERY = action.payload;
+      const PAGE = action.meta.page;
+      const MOVIES_URL = `https://api.themoviedb.org/3/search/multi?api_key=${API_KEY}&language=${LANG}&query=${QUERY}&page=${PAGE}&include_adult=false"`;
+
       next([
         apiRequest({
           feature: MOVIES,
@@ -25,6 +26,7 @@ export const moviesMiddleware: Middleware = () => (next: any) => (action: any) =
         setLoader({ state: true, feature: MOVIES }),
       ]);
       break;
+    }
 
     case CLEAN_MOVIES:
       next(setMovies({ movies: {}, normalizeKey: '' }));

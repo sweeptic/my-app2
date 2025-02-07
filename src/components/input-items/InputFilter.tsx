@@ -14,6 +14,7 @@ const Input = forwardRef(
 
     const [enteredFilter, setEnteredFilter] = useState('');
     const [isCleaned, setIsCleaned] = useState(true);
+    const [page, setPage] = useState(1);
 
     const dispatch = useDispatch();
 
@@ -25,7 +26,7 @@ const Input = forwardRef(
         if (inputValue) {
           const timer = setTimeout(() => {
             if (enteredFilter === inputValue) {
-              dispatch(fetchMovies({ query: enteredFilter }));
+              dispatch(fetchMovies({ query: enteredFilter, page: page }));
             }
           }, waitForMsec);
           return () => {
