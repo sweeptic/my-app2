@@ -73,7 +73,7 @@ const MovieFinder = () => {
   return (
     <section>
       {<Spinner isLoading={spinner.loading} />}
-      {detailIsShown && <ModalItem onClose={clearDetails} content={<MovieItem item={detail} />} />}
+      {detailIsShown && <ModalItem onClose={clearDetails} content={<MovieItem item={detail} onlyDetail={true} />} />}
       {messageIsShown && <ModalItem onClose={clearMessage} content={<ErrorItem message={errorMessage} />} />}
       <div>
         <Input {...inputFilterSetup} ref={inputRef} />
