@@ -1,6 +1,6 @@
 import { SET_GENRES } from 'store/actions/genre';
 
-const initState: undefined[] = [];
+const initState: any = {};
 
 export const genresReducer = (ui = initState, action: any) => {
   switch (action.type) {

@@ -79,7 +79,7 @@ const MovieFinder = () => {
         <Input {...inputFilterSetup} ref={inputRef} />
       </div>
       <article className="result">
-        <MovieList />
+        <MovieList ref={inputRef} waitForKey={inputFilterSetup.waitForKey} />
       </article>
     </section>
   );

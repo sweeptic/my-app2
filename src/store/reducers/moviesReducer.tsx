@@ -1,6 +1,6 @@
 import { SET_MOVIES } from 'store/actions/movie';
 
-const initState: never[] = [];
+const initState: any = {};
 
 export const moviesReducer = (movies = initState, action: any) => {
   switch (action.type) {
