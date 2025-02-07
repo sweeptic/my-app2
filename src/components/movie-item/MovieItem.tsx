@@ -11,8 +11,6 @@ const MovieItem = ({ item, onDetails, onlyDetail }: MovieItem) => {
     }
   }
 
-  console.log('render details item', onlyDetail);
-
   return (
     <div className="card" onClick={onDetailHandler}>
       <span key={item.id}>{item.title}</span>

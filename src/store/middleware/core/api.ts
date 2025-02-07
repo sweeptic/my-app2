@@ -18,15 +18,15 @@ export const apiMiddleware =
               error: response.status_message,
               feature: feature,
             };
-            console.log('ERROR', { error, feature });
+            console.log('DISPATCH ERROR', { error, feature });
             dispatch(apiError({ error, feature }));
           } else {
             dispatch(apiSuccess({ response, feature }));
           }
         })
         .catch((error) => {
-          console.log('error', error);
-          dispatch(apiError({ error, feature }));
+          console.log('CATCH ERROR', error);
+          dispatch(apiError({ error: 'application error', feature }));
         });
     }
   };
