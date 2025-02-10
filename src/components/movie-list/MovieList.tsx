@@ -40,7 +40,7 @@ const MovieList = forwardRef(({ waitForKey }: any, inputRef: any) => {
   return (
     <>
       <span>{`${count} Search result(s)`}</span>
-      <div>{movieListContent}</div>;
+      <div>{movieListContent}</div>
     </>
   );
 });
