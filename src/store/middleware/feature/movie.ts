@@ -8,7 +8,8 @@ import { initMoviesState } from 'store/reducers/moviesReducer';
 const API_KEY = process.env.REACT_APP_MOVIE_API_KEY;
 const LANG = 'en-US';
 
-export const moviesMiddleware: Middleware = () => (next: any) => (action: any) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const moviesMiddleware: Middleware = () => (next) => (action: any) => {
   next(action);
 
   switch (action.type) {

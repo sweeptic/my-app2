@@ -3,7 +3,8 @@ import { forwardedRefHelper } from 'helpers/tsHelpers';
 import { ForwardedRef, forwardRef, memo, ReactNode } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchDetail } from 'store/actions/detail';
-import { getSearchCount } from 'store/reducers/moviesReducer';
+import { TGenresItem } from 'store/reducers/genresReducer';
+import { getSearchCount, TMovieResponseData } from 'store/reducers/moviesReducer';
 import { getMoviesArray } from 'store/selectors/feature_selectors';
 import { useAppSelector } from 'store/store';
 
@@ -13,7 +14,9 @@ interface IMovieList {
 
 const MovieList = forwardRef(({ waitForKey }: IMovieList, inputRef: ForwardedRef<HTMLInputElement>) => {
   const dispatch = useDispatch();
-  const moviesData = useSelector((state) => getMoviesArray(state));
+  const moviesData = useSelector((state: { movies: TMovieResponseData; genres: { genres: TGenresItem[] } }) =>
+    getMoviesArray(state)
+  );
   const count = useAppSelector((state) => getSearchCount(state));
   const moviesList = getMoviesList();
   const movieListContent = getMovieListContent();
@@ -23,7 +26,7 @@ const MovieList = forwardRef(({ waitForKey }: IMovieList, inputRef: ForwardedRef
   }
 
   function getMoviesList(): ReactNode[] {
-    return moviesData.map((item: any) => <MovieItem key={item.id} item={item} onDetails={onMovieSelectHandler} />);
+    return moviesData.map((item) => <MovieItem key={item.id} item={item} onDetails={onMovieSelectHandler} />);
   }
 
   function getMovieListContent() {

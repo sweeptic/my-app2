@@ -1,12 +1,9 @@
-import { apiError, apiSuccess } from 'store/actions/api';
+import { Middleware } from 'redux';
 
-export const actionSplitterMiddleware =
-  () =>
-  (next: any) =>
-  (action: any): any => {
-    if (Array.isArray(action)) {
-      action.forEach((_action) => next(_action));
-    } else {
-      next(action);
-    }
-  };
+export const actionSplitterMiddleware: Middleware = () => (next) => (action) => {
+  if (Array.isArray(action)) {
+    action.forEach((_action) => next(_action));
+  } else {
+    next(action);
+  }
+};

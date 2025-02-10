@@ -7,7 +7,7 @@ export interface IStandardAction extends Action {
   //   meta: IRequestMeta;
 }
 
-export type TDetailFetchData = {
+export type TDetailResponseData = {
   adult: number;
   backdrop_path: null | string;
   belongs_to_collection: null | string;

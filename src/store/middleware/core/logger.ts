@@ -1,6 +1,8 @@
-export const loggerMiddleware =
-  ({ getState }: any) =>
-  (next: any) =>
+import { Middleware } from 'redux';
+
+export const loggerMiddleware: Middleware =
+  ({ getState }) =>
+  (next) =>
   (action: any) => {
     const { NODE_ENV } = process.env;
 

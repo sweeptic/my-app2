@@ -1,3 +1,4 @@
+import { Middleware } from 'redux';
 import { apiRequest, API_ERROR, API_SUCCESS } from 'store/actions/api';
 import { CLEAN_DETAIL, DETAIL, FETCH_DETAIL, setDetail } from 'store/actions/detail';
 import { setNotification } from 'store/actions/message';
@@ -6,7 +7,8 @@ import { setLoader } from 'store/actions/ui';
 const API_KEY = process.env.REACT_APP_MOVIE_API_KEY;
 const LANG = 'en-US';
 
-export const detailMiddleware = () => (next: any) => (action: any) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const detailMiddleware: Middleware = () => (next) => (action: any) => {
   next(action);
   const QUERY = action.payload;
   const QUERY_URL = `https://api.themoviedb.org/3/movie/${QUERY}?api_key=${API_KEY}&language=${LANG}`;

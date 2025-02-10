@@ -5,7 +5,11 @@ import { SET_GENRES } from 'store/actions/genre';
 const initState = {} as IGenresState;
 
 export interface IGenresState {
-  genres: { genres: TGenresItem[] };
+  genres: IGenresResponseData;
+}
+
+export interface IGenresResponseData {
+  genres: TGenresItem[];
 }
 
 export interface TGenresItem {

@@ -4,14 +4,13 @@ import ModalContainer from 'components/overlays/ModalContainer';
 import Spinner from 'components/overlays/Spinner';
 import Pagination from 'components/pagination/Pagination';
 import { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { fetchGenres } from 'store/actions/genre';
 import { getLoadingState } from 'store/reducers/uiReducer';
-import { useAppSelector } from 'store/store';
+import { useAppDispatch, useAppSelector } from 'store/store';
 
 const MovieFinder = () => {
   const spinner = useAppSelector((state) => getLoadingState(state));
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [enteredFilter, setEnteredFilter] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
 
