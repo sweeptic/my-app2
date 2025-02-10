@@ -23,7 +23,7 @@ const rootReducer = combineReducers({
 
 const featureMiddleware = [genresMiddleware, detailMiddleware, moviesMiddleware];
 
-const coreMiddleware = [actionSplitterMiddleware, apiMiddleware, notificationMiddleware /* loggerMiddleware */];
+const coreMiddleware = [actionSplitterMiddleware, apiMiddleware, notificationMiddleware, loggerMiddleware];
 
 const customMiddleware = [...featureMiddleware, ...coreMiddleware];
 
