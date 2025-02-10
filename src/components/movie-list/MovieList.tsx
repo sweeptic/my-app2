@@ -10,14 +10,12 @@ const MovieList = forwardRef(({ waitForKey }: any, inputRef: any) => {
   const moviesData = useSelector((state) => selectMovies(state));
 
   function onMovieSelectHandler(item: number) {
-    console.log('click', item);
     dispatch(fetchDetail({ query: item.toString() }));
   }
 
   function getMoviesList() {
     return Object.keys(moviesData).map((item): any => {
       const element = moviesData[item];
-      console.log('render movie list', element);
 
       return <MovieItem key={element.id} item={element} onDetails={onMovieSelectHandler} />;
     });
@@ -27,7 +25,7 @@ const MovieList = forwardRef(({ waitForKey }: any, inputRef: any) => {
     function getContent() {
       let content;
 
-      if (inputLength < waitForKey) {
+      if (inputLength < waitForKey || !inputLength) {
         content = `Please enter at least ${waitForKey} letters.`;
       } else {
         content = moviesList.length ? moviesList : 'There are no search results.';
