@@ -1,60 +1,18 @@
-import ModalItem from 'components/detail-item/ModalItem';
-import ErrorItem from 'components/error-item/ErrorItem';
 import Input from 'components/input-items/InputFilter';
-import MovieItem from 'components/movie-item/MovieItem';
 import MovieList from 'components/movie-list/MovieList';
+import ModalContainer from 'components/overlays/ModalContainer';
 import Spinner from 'components/overlays/Spinner';
 import Pagination from 'components/pagination/Pagination';
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { cleanDetail } from 'store/actions/detail';
 import { fetchGenres } from 'store/actions/genre';
-import { removeNotification } from 'store/actions/message';
-import { getDetailRawData } from 'store/reducers/detailReducer';
-import { getMessageRawData } from 'store/reducers/notificationReducer';
 import { getLoadingState } from 'store/reducers/uiReducer';
-
-const errorMessage = 'Something went wrong. Please try again later.';
 
 const MovieFinder = () => {
   const spinner = useSelector((state) => getLoadingState(state));
-  const detail = useSelector((state) => getDetailRawData(state));
-  const messages = useSelector((state) => getMessageRawData(state));
   const dispatch = useDispatch();
-  const [detailIsShown, setDetailIsShown] = useState(false);
-  const [messageIsShown, setMessageIsShown] = useState(false);
   const [enteredFilter, setEnteredFilter] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    if (messages.length) {
-      setMessageIsShown(true);
-    } else {
-      setMessageIsShown(false);
-    }
-  }, [messages]);
-
-  useEffect(() => {
-    console.log('spinner', spinner);
-  }, [spinner]);
-
-  useEffect(() => {
-    if (Object.keys(detail).length) {
-      setDetailIsShown(true);
-    } else {
-      setDetailIsShown(false);
-    }
-  }, [detail]);
-
-  const clearDetails = () => {
-    dispatch(cleanDetail());
-    inputRef.current?.focus();
-  };
-
-  const clearMessage = () => {
-    dispatch(removeNotification());
-    inputRef.current?.focus();
-  };
 
   useEffect(() => {
     getStaticCollections();
@@ -74,9 +32,8 @@ const MovieFinder = () => {
 
   return (
     <section>
-      {<Spinner isLoading={spinner.loading} />}
-      {detailIsShown && <ModalItem onClose={clearDetails} content={<MovieItem item={detail} onlyDetail={true} />} />}
-      {messageIsShown && <ModalItem onClose={clearMessage} content={<ErrorItem message={errorMessage} />} />}
+      <Spinner isLoading={spinner.loading} />
+      <ModalContainer ref={inputRef} />
       <div>
         <Input {...inputFilterSetup} ref={inputRef} enteredFilter={enteredFilter} setEnteredFilter={setEnteredFilter} />
         <div>
