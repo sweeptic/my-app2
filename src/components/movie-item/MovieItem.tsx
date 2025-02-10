@@ -1,10 +1,10 @@
 interface MovieItem {
   item: any;
   onDetails?: (param: any) => void;
-  onlyDetail?: boolean;
+  details?: boolean;
 }
 
-const MovieItem = ({ item, onDetails, onlyDetail }: MovieItem) => {
+const MovieItem = ({ item, onDetails, details }: MovieItem) => {
   function onDetailHandler() {
     if (onDetails) {
       onDetails(item.id);
@@ -15,7 +15,7 @@ const MovieItem = ({ item, onDetails, onlyDetail }: MovieItem) => {
     <div className="card" onClick={onDetailHandler}>
       <div>
         <h4>
-          {item.title} -{item.id}
+          {item.title} - {item.id}
         </h4>
       </div>
       <div>

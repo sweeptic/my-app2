@@ -51,7 +51,7 @@ const ModalContainer = forwardRef((props, inputRef: any) => {
 
   return (
     <>
-      {detailIsShown && <ModalItem onClose={clearDetails} content={<MovieItem item={detail} onlyDetail={true} />} />}
+      {detailIsShown && <ModalItem onClose={clearDetails} content={<MovieItem item={detail} details={true} />} />}
       {messageIsShown && <ModalItem onClose={clearMessage} content={<ErrorItem message={errorMessage} />} />}
     </>
   );
