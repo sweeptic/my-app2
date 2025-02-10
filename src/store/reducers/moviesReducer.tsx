@@ -1,6 +1,6 @@
 import { SET_MOVIES } from 'store/actions/movie';
 
-export const initMoviesState: any = { results: {} };
+export const initMoviesState: any = { results: [] };
 
 export const moviesReducer = (movies = initMoviesState, action: any) => {
   switch (action.type) {
@@ -11,3 +11,5 @@ export const moviesReducer = (movies = initMoviesState, action: any) => {
       return movies;
   }
 };
+
+export const getMovies = (state: any) => state.movies.results;

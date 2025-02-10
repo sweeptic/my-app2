@@ -30,14 +30,11 @@ export const moviesMiddleware: Middleware = () => (next: any) => (action: any) =
     }
 
     case CLEAN_MOVIES:
-      next(setMovies({ movies: initMoviesState, normalizeKey: '', listObj: '' }));
+      next(setMovies({ movies: initMoviesState }));
       break;
 
     case `${MOVIES} ${API_SUCCESS}`:
-      next([
-        setMovies({ movies: action.payload, normalizeKey: 'id', listObj: 'results' }),
-        setLoader({ state: false, feature: MOVIES }),
-      ]);
+      next([setMovies({ movies: action.payload }), setLoader({ state: false, feature: MOVIES })]);
       break;
 
     case `${MOVIES} ${API_ERROR}`:
