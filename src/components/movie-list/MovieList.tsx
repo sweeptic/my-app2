@@ -5,9 +5,9 @@ import { fetchDetail } from 'store/actions/detail';
 import { getMoviesRawData } from 'store/reducers/moviesReducer';
 
 const MovieList = forwardRef(({ waitForKey }: any, inputRef: any) => {
-  const moviesData = useSelector((state) => getMoviesRawData(state));
   const dispatch = useDispatch();
   const inputLength = inputRef?.current?.value.length;
+  const moviesData = useSelector((state) => getMoviesRawData(state));
 
   function onMovieSelectHandler(item: number) {
     console.log('click', item);
@@ -17,7 +17,7 @@ const MovieList = forwardRef(({ waitForKey }: any, inputRef: any) => {
   function getMoviesList() {
     return Object.keys(moviesData).map((item): any => {
       const element = moviesData[item];
-      return <MovieItem key={item} item={element} onDetails={onMovieSelectHandler} />;
+      return <MovieItem key={element.id} item={element} onDetails={onMovieSelectHandler} />;
     });
   }
 
