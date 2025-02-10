@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchMovies } from 'store/actions/movie';
 import { getSearchResults, getSearchTotalPage } from 'store/reducers/moviesReducer';
+import { useAppSelector } from 'store/store';
 
 interface IusePagination {
   enteredFilter: string;
@@ -11,8 +12,8 @@ function usePagination(enteredFilter: IusePagination) {
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
   const [isPaginationEnabled, setPaginationEnabled] = useState(false);
-  const maxPage = useSelector((state) => getSearchTotalPage(state));
-  const SearchResults = useSelector((state) => getSearchResults(state));
+  const maxPage = useAppSelector((state) => getSearchTotalPage(state));
+  const SearchResults = useAppSelector((state) => getSearchResults(state));
 
   function next() {
     setCurrentPage((currentPage) => Math.min(currentPage + 1, maxPage));

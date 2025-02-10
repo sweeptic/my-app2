@@ -9,13 +9,14 @@ import { removeNotification } from 'store/actions/message';
 import { getDetailRawData } from 'store/reducers/detailReducer';
 import { getMessageRawData } from 'store/reducers/notificationReducer';
 import { getLoadingState } from 'store/reducers/uiReducer';
+import { useAppSelector } from 'store/store';
 
 const ModalContainer = forwardRef((_, inputRef: ForwardedRef<HTMLInputElement>) => {
   const [detailIsShown, setDetailIsShown] = useState(false);
   const [messageIsShown, setMessageIsShown] = useState(false);
-  const detail = useSelector((state) => getDetailRawData(state));
-  const messages = useSelector((state) => getMessageRawData(state));
-  const spinner = useSelector((state) => getLoadingState(state));
+  const detail = useAppSelector((state) => getDetailRawData(state));
+  const messages = useAppSelector((state) => getMessageRawData(state));
+  const spinner = useAppSelector((state) => getLoadingState(state));
   const errorMessage = 'Something went wrong. Please try again later.';
 
   const dispatch = useDispatch();

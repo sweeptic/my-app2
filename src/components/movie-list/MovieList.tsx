@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchDetail } from 'store/actions/detail';
 import { getSearchCount } from 'store/reducers/moviesReducer';
 import { getMoviesArray } from 'store/selectors/feature_selectors';
+import { useAppSelector } from 'store/store';
 
 interface IMovieList {
   waitForKey: number;
@@ -13,7 +14,7 @@ interface IMovieList {
 const MovieList = forwardRef(({ waitForKey }: IMovieList, inputRef: ForwardedRef<HTMLInputElement>) => {
   const dispatch = useDispatch();
   const moviesData = useSelector((state) => getMoviesArray(state));
-  const count = useSelector((state) => getSearchCount(state));
+  const count = useAppSelector((state) => getSearchCount(state));
   const moviesList = getMoviesList();
   const movieListContent = getMovieListContent();
 

@@ -7,9 +7,10 @@ import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchGenres } from 'store/actions/genre';
 import { getLoadingState } from 'store/reducers/uiReducer';
+import { useAppSelector } from 'store/store';
 
 const MovieFinder = () => {
-  const spinner = useSelector((state) => getLoadingState(state));
+  const spinner = useAppSelector((state) => getLoadingState(state));
   const dispatch = useDispatch();
   const [enteredFilter, setEnteredFilter] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);

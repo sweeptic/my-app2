@@ -12,6 +12,7 @@ import { detailReducer } from './reducers/detailReducer';
 import { detailMiddleware } from './middleware/feature/detail';
 import { notificationReducer } from './reducers/notificationReducer';
 import { notificationMiddleware } from './middleware/core/notification';
+import { TypedUseSelectorHook, useSelector } from 'react-redux';
 
 const rootReducer = combineReducers({
   ui: uiReducer,
@@ -31,3 +32,8 @@ export const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(customMiddleware),
 });
+
+// Infer the `RootState` and `AppDispatch` types from the store itself
+export type RootState = ReturnType<typeof store.getState>;
+
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;

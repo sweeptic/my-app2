@@ -1,21 +1,37 @@
+import { UnknownAction } from 'redux';
 import { createSelector } from 'reselect';
 import { SET_GENRES } from 'store/actions/genre';
 
-const initState: any = {};
+const initState = {} as IGenresState;
 
-export const genresReducer = (genres = initState, action: any) => {
+export interface IGenresState {
+  genres: { genres: TGenresItem[] };
+}
+
+export interface TGenresItem {
+  id: number;
+  name: string;
+}
+
+export const genresReducer = (genres: IGenresState = initState, action: UnknownAction) => {
+  console.log('genrespayload', action.payload);
+
   switch (action.type) {
     case SET_GENRES:
-      return action.payload;
+      return action.payload as IGenresState;
     default:
       return genres;
   }
 };
 
-const getGenres = (state: any) => state.genres.genres;
+const getGenres = (state: IGenresState) => state.genres.genres;
 
-export const getGenresObject = createSelector(getGenres, (genre: any) => {
-  return genre?.reduce((acc: any, item: any) => {
+export interface IGenresIndex {
+  [key: string]: string;
+}
+
+export const getGenresObject = createSelector(getGenres, (genre: TGenresItem[]) => {
+  return genre?.reduce((acc: IGenresIndex, item: TGenresItem) => {
     acc[item['id']] = item.name;
     return acc;
   }, {});
