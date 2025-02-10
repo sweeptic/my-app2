@@ -24,14 +24,17 @@ const MovieList = forwardRef(({ waitForKey }: any, inputRef: any) => {
   }
 
   function getMovieListContent() {
-    let content;
+    function getContent() {
+      let content;
 
-    if (inputLength < waitForKey) {
-      content = `Please enter at least ${waitForKey} letters.`;
-    } else {
-      content = moviesList.length ? moviesList : 'There are no search results.';
+      if (inputLength < waitForKey) {
+        content = `Please enter at least ${waitForKey} letters.`;
+      } else {
+        content = moviesList.length ? moviesList : 'There are no search results.';
+      }
+      return content;
     }
-    return content;
+    return getContent();
   }
 
   const moviesList = getMoviesList();
