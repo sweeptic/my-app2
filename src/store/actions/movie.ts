@@ -1,5 +1,3 @@
-import { MoviesData } from './api';
-
 export const MOVIES = '[Movies]';
 
 export const FETCH_MOVIES = `${MOVIES} FETCH`;

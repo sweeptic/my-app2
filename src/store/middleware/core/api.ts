@@ -1,28 +1,20 @@
 import { Dispatch } from 'react';
-import {
-  apiError,
-  apiSuccess,
-  IActionObject,
-  IActions,
-  IApiRequestActionCreator,
-  IDispatchAction,
-  IMeta,
-} from 'store/actions/api';
+import { apiError, apiSuccess } from 'store/actions/api';
 
 export const apiMiddleware =
-  ({ dispatch }: { dispatch: Dispatch<IApiRequestActionCreator | IActionObject> }) =>
-  (next: Dispatch<IActions>) =>
-  (action: IActions) => {
+  ({ dispatch }: { dispatch: any }) =>
+  (next: any) =>
+  (action: any) => {
     next(action);
 
     if (action.type.includes('API_REQUEST')) {
-      const { body, url, method, feature }: IMeta = action.meta;
+      const { body, url, method, feature }: any = action.meta;
 
       fetchData({ url, body, method, feature, dispatch });
     }
   };
 
-function fetchData({ url, body, method, feature, dispatch }: IDispatchAction) {
+function fetchData({ url, body, method, feature, dispatch }: any) {
   fetch(url, { body, method })
     .then((response) => response.json())
     .then((response) => {
