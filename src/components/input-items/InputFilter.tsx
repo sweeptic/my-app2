@@ -1,4 +1,5 @@
-import { forwardRef, useEffect, useRef, useState } from 'react';
+import { forwardedRefHelper } from 'helpers/tsHelpers';
+import { Dispatch, ForwardedRef, forwardRef, SetStateAction, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { cleanMovies, fetchMovies } from 'store/actions/movie';
 
@@ -6,34 +7,31 @@ interface InputFilter {
   waitForKey: number;
   waitForMsec: number;
   clearWhenDelete: boolean;
-  setEnteredFilter: any;
-  enteredFilter: any;
+  setEnteredFilter: Dispatch<SetStateAction<string>>;
+  enteredFilter: string;
 }
 
-const Input = forwardRef(
+const InputFilter = forwardRef(
   (
     { waitForKey = 1, waitForMsec = 100, clearWhenDelete = false, setEnteredFilter, enteredFilter }: InputFilter,
-    inputRef: any
+    inputRef: ForwardedRef<HTMLInputElement>
   ) => {
     const [isCleaned, setIsCleaned] = useState(true);
 
     const dispatch = useDispatch();
 
     useEffect(() => {
-      const inputValue = inputRef?.current.value;
-
       if (enteredFilter.length >= waitForKey) {
         setIsCleaned(false);
-        if (inputValue) {
-          const timer = setTimeout(() => {
-            if (enteredFilter === inputValue) {
-              dispatch(fetchMovies({ query: enteredFilter, page: 1 }));
-            }
-          }, waitForMsec);
-          return () => {
-            clearTimeout(timer);
-          };
-        }
+
+        const timer = setTimeout(() => {
+          if (enteredFilter === forwardedRefHelper(inputRef)?.value) {
+            dispatch(fetchMovies({ query: enteredFilter, page: 1 }));
+          }
+        }, waitForMsec);
+        return () => {
+          clearTimeout(timer);
+        };
       } else {
         setIsCleaned(true);
       }
@@ -46,7 +44,7 @@ const Input = forwardRef(
     }, [isCleaned]);
 
     useEffect(() => {
-      inputRef?.current.focus();
+      forwardedRefHelper(inputRef)?.focus;
     }, []);
 
     return (
@@ -60,4 +58,4 @@ const Input = forwardRef(
   }
 );
 
-export default Input;
+export default InputFilter;

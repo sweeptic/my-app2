@@ -1,4 +1,4 @@
-import Input from 'components/input-items/InputFilter';
+import InputFilter from 'components/input-items/InputFilter';
 import MovieList from 'components/movie-list/MovieList';
 import ModalContainer from 'components/overlays/ModalContainer';
 import Spinner from 'components/overlays/Spinner';
@@ -35,7 +35,12 @@ const MovieFinder = () => {
       <Spinner isLoading={spinner.loading} />
       <ModalContainer ref={inputRef} />
       <div>
-        <Input {...inputFilterSetup} ref={inputRef} enteredFilter={enteredFilter} setEnteredFilter={setEnteredFilter} />
+        <InputFilter
+          {...inputFilterSetup}
+          ref={inputRef}
+          enteredFilter={enteredFilter}
+          setEnteredFilter={setEnteredFilter}
+        />
         <div>
           <Pagination enteredFilter={enteredFilter} />
         </div>

@@ -1,9 +1,14 @@
 import Modal from './Modal';
 
-const ModalItem = (props: any) => {
+interface IModalItem {
+  onClose: () => void;
+  content: JSX.Element;
+}
+
+const ModalItem = ({ content, onClose }: IModalItem) => {
   return (
-    <Modal onClose={props.onClose}>
-      <div>{props.content}</div>
+    <Modal onClose={onClose}>
+      <div>{content}</div>
     </Modal>
   );
 };
