@@ -26,7 +26,7 @@ export const genresMiddleware = () => (next: any) => (action: any) => {
 
     case `${GENRES} ${API_SUCCESS}`:
       next([
-        setGenres({ movies: action.payload.genres, normalizeKey: 'id' }),
+        setGenres({ movies: action.payload, normalizeKey: 'id', listObj: 'genres' }),
         setLoader({ state: false, feature: GENRES }),
       ]);
       break;

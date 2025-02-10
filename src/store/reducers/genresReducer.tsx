@@ -1,6 +1,6 @@
 import { SET_GENRES } from 'store/actions/genre';
 
-const initState: any = {};
+const initState: any = { genres: {} };
 
 export const genresReducer = (genres = initState, action: any) => {
   switch (action.type) {
