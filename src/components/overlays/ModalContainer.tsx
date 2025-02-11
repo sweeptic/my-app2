@@ -2,6 +2,7 @@ import ModalItem from 'components/detail-item/ModalItem';
 import ErrorItem from 'components/error-item/ErrorItem';
 import MovieItem from 'components/movie-item/MovieItem';
 import { forwardedRefHelper } from 'helpers/tsHelpers';
+import { getScrollPosition } from 'hooks/usePageLastPosition';
 import { ForwardedRef, forwardRef, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { cleanDetail } from 'store/actions/detail';
@@ -31,9 +32,7 @@ const ModalContainer = forwardRef((_, inputRef: ForwardedRef<HTMLInputElement>) 
     }
   }, [messages]);
 
-  useEffect(() => {
-    console.log('spinner', spinner);
-  }, [spinner]);
+  useEffect(() => {}, [spinner]);
 
   useEffect(() => {
     if (Object.keys(detail).length) {
@@ -43,14 +42,25 @@ const ModalContainer = forwardRef((_, inputRef: ForwardedRef<HTMLInputElement>) 
     }
   }, [detail]);
 
+  function setLastPosition() {
+    window.scrollTo({
+      top: getScrollPosition(),
+      behavior: 'auto',
+    });
+  }
+
   const clearDetails = () => {
+    console.log('cleardetails');
+
     dispatch(cleanDetail());
     forwardedRefHelper(inputRef)?.focus();
+    setLastPosition();
   };
 
   const clearMessage = () => {
     dispatch(removeNotification());
     forwardedRefHelper(inputRef)?.focus();
+    setLastPosition();
   };
 
   return (

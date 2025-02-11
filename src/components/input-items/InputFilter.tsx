@@ -17,7 +17,6 @@ const InputFilter = forwardRef(
     inputRef: ForwardedRef<HTMLInputElement>
   ) => {
     const [isCleaned, setIsCleaned] = useState(true);
-
     const dispatch = useAppDispatch();
 
     useEffect(() => {
@@ -48,12 +47,15 @@ const InputFilter = forwardRef(
     }, []);
 
     return (
-      <input
-        type="text"
-        value={enteredFilter}
-        onChange={(event) => setEnteredFilter(event.target.value)}
-        ref={inputRef}
-      />
+      <form className="input-form">
+        <label>Search:</label>
+        <input
+          type="text"
+          value={enteredFilter}
+          onChange={(event) => setEnteredFilter(event.target.value)}
+          ref={inputRef}
+        />
+      </form>
     );
   }
 );

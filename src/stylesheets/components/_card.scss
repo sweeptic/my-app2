@@ -1,4 +1,46 @@
 .card {
   margin-bottom: 12px;
   background-color: lightslategrey;
+
+  display: flex;
+  border-radius: 0.5rem;
+
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: space-between;
+
+  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+
+  @include devices(tab-port) {
+    width: 48%;
+  }
+
+  @include devices(tab-land) {
+    width: 32%;
+  }
+
+  @include devices(normal) {
+    width: 24%;
+  }
+
+  &__description-container {
+    padding: 1rem;
+
+    span {
+      font-weight: 600;
+    }
+  }
+
+  &__picture-container {
+    border-radius: 0.5rem;
+    width: 100%;
+    height: auto;
+    padding: 0.3rem;
+  }
+
+  &__overview {
+    span {
+      font-weight: 600;
+    }
+  }
 }

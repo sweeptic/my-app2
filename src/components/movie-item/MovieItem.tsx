@@ -13,12 +13,30 @@ const MovieItem = ({ item, onDetails, details }: IMovieItem) => {
     }
   }
 
+  function getPictureUrl(poster_path: string) {
+    return poster_path ? `https://image.tmdb.org/t/p/w300_and_h450_bestv2/${item.poster_path}` : 'fallback-image.jpg';
+  }
+
+  function getImdbLink(link: string | undefined) {
+    if (link) {
+      return (
+        <div>
+          <span>Link to</span>{' '}
+          <a href={`https://www.imdb.com/title/${link}/`} target="_blank" rel="noopener noreferrer">
+            imdb
+          </a>
+          .
+        </div>
+      );
+    }
+  }
+
   return (
     <section className="card" onClick={onDetailHandler}>
       <article className="card__detail">
         <img
           className="card__picture-container"
-          //   src={getPictureUrl(item.poster_path)}
+          src={getPictureUrl(item.poster_path)}
           alt={`${item.title} picture here`}
         ></img>
         <div className="card__description-container">
@@ -41,7 +59,7 @@ const MovieItem = ({ item, onDetails, details }: IMovieItem) => {
               <span>Country:</span> {item.production_countries}
             </aside>
           )}
-          {/* {details && <div>{getImdbLink(item.imdb_id)}</div>} */}
+          {details && <div>{getImdbLink(item.imdb_id)}</div>}
         </div>
       </article>
       <div className="card__overview">

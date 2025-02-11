@@ -1,0 +1,7 @@
+.list-content {
+  @include devices(tab-port) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+}

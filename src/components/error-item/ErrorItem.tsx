@@ -3,7 +3,7 @@ interface IErrorItem {
 }
 
 const ErrorItem = ({ message }: IErrorItem) => {
-  return <div>{message}</div>;
+  return <div className="error-item">{message}</div>;
 };
 
 export default ErrorItem;
